@@ -1,12 +1,12 @@
 var mongoose = require('mongoose')
-const { isNumric } = require('validator')
+const { isNumeric } = require('validator')
 
 
 const incomeSchema = mongoose.Schema({
     amount: {
         type: String,
         require: [true, "please enter the amount of Income"],
-        validate: [isNumric, "please enter the amount in Number"]
+        validate: [isNumeric, "please enter the amount in Number"]
     },
     reason: {
         type: String,

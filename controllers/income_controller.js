@@ -12,7 +12,7 @@ module.exports.add_income = async(req, res) => {
     }
 
 }
-module.exports.get_income = async(res, res) => {
+module.exports.get_income = async(req, res) => {
     try {
         const income = await Income.findById({ id })
         res.status(200).json({ income })
@@ -23,6 +23,7 @@ module.exports.get_income = async(res, res) => {
 module.exports.edit_income = async(req, res) => {
     try {
         const { amount, reason } = req.body
+        const id = req.params.id
         const income = await Income.findOneAndReplace({ id: _id }, {
             $set: {
                 amount: amount,
@@ -35,4 +36,13 @@ module.exports.edit_income = async(req, res) => {
         res.status(500).json({ error: error.message })
     }
 
+}
+module.exports.delete_income = async(req, res) => {
+    try {
+        const id = req.params.id
+        await Income.deleteOne({ id })
+        res.status(200).json({ message: `Income with ${id} deleted` })
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 }
