@@ -1,10 +1,22 @@
 var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+const { isNumric } = require('validator')
 
-var income = new Schema({
-  _id:Number,
-  amount:Number,
-  reason:String
+
+const incomeSchema = mongoose.Schema({
+    amount: {
+        type: String,
+        require: [true, "please enter the amount of Income"],
+        validate: [isNumric, "please enter the amount in Number"]
+    },
+    reason: {
+        type: String,
+        require: [true, "please enter Income reason"]
+
+    }
 })
 
-module.exports = mongoose.model('income', income);
+
+
+
+const Income = mongoose.model('income', incomeSchema);
+module.exports = Income
