@@ -1,6 +1,11 @@
 const Income = require('../model/income')
 
 
+function handle_error(error) {
+
+}
+
+
 module.exports.add_income = async(req, res) => {
     try {
         const { amount, reason } = req.body;
@@ -8,7 +13,7 @@ module.exports.add_income = async(req, res) => {
         res.status(200).json({ income: income._id })
 
     } catch (error) {
-        res.status(400).json({ Error: "plase try agin" })
+        res.status(400).json({ Error: error.message })
     }
 
 }
