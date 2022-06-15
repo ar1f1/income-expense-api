@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { isEmail } = require("validator")
 const bcrypt = require('bcrypt')
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     user_name: {
         type: String,
         required: [true, "User name is required!"],
@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, "password is required!"],
-        maxlenght: [6, "The minemum password lenght is 6"]
+        minlenght: [6, "The minemum password lenght is 6"]
     }
 })
 

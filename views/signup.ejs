@@ -23,6 +23,11 @@
     </form>
 
     <script>
+        const user_name_error = document.querySelector('.user_name.error')
+        const password_error = document.querySelector('.email.error')
+
+
+
         const form = document.querySelector('form')
 
         form.addEventListener('submit', async(e) => {
@@ -46,8 +51,11 @@
                     }
                 })
                 const data = await res.json()
-                if (data.error) {
-                    console.log(error.message)
+                if (data.user) {
+                    location.assign('/user/login')
+                }
+                if (data.message) {
+                    console.log(data.message)
                 }
 
             } catch (error) {

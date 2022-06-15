@@ -4,12 +4,14 @@ var app = express()
 var mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 const user_route = require('./controllers/user_controller')
+const cookieParser = require('cookie-parser')
 
 
 
 
 // middleware
 app.use(express.json())
+app.use(cookieParser())
 
 
 // Views     

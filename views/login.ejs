@@ -20,10 +20,15 @@
     </form>
 
     <script>
+        const user_name_error = document.querySelector(".user_name.error")
+        const password_error = document.querySelector('.password.error')
         const form = document.querySelector('form')
 
         form.addEventListener('submit', async(e) => {
             e.preventDefault()
+
+            user_name_error.textContent = ''
+            password_error.textContent = ''
 
             //get value
             const user_name = form.user_name.value
@@ -40,12 +45,14 @@
                     }
                 })
                 const data = await res.json()
-                console.log(data)
-                if (data.error) {
-                    console.log(error.message)
-                }
                 if (data.user) {
                     location.assign('/user/admin')
+                }
+                if (data.message == "Inconrect password") {
+                    password_error.textContent = data.message
+                }
+                if (data.message == "Inconrect User name") {
+                    user_name_error.textContent = data.message
                 }
 
             } catch (error) {
