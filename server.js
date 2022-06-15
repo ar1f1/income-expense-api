@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser')
 // middleware
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.static('public'))
 
 
 // Views     

@@ -1,0 +1,17 @@
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*='col-'] {
+    float: left;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+body {
+    background-color: black;
+}
