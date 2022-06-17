@@ -10,5 +10,6 @@ router.post('/login', user_controller.login)
 router.get('/signup', user_controller.get_signup)
 router.post('/signup', user_controller.register)
 router.get('/admin', requireUserAuth.requireUserAuth, admin.get_admin)
+router.get('/logout', user_controller.logout)
 
 module.exports = router

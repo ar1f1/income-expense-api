@@ -8,5 +8,6 @@ git clone https://github.com/
 cd income-expense-api
 npm install
 npm start
+http://localhost:3000/user/login
 ```
 

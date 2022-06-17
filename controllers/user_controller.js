@@ -5,7 +5,10 @@ const jwt = require('jsonwebtoken')
 
 
 
-
+module.exports.logout = (req, res) => {
+    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 })
+    res.redirect('login')
+}
 
 module.exports.add_income = (req, res) => {
     res.render('add_income')
