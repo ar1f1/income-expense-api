@@ -1,9 +1,6 @@
 require('./config/database').connect()
 var express = require('express')
 var app = express()
-var mongoose = require('mongoose')
-var bodyParser = require('body-parser')
-const user_route = require('./controllers/user_controller')
 const cookieParser = require('cookie-parser')
 
 

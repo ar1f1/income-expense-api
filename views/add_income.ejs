@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add_income</title>
+</head>
+
+<body>
+    <form>
+        <label for="amount">Amount</label>
+        <input type="number" name="amount">
+        <div class="amount error"></div>
+        <label for="reason">Reason</label>
+        <input type="text" name="reason">
+        <div class="reason error"></div>
+        <button>Add Income</button>
+    </form>
+    <script>
+        const amountError = document.querySelector('.amount.error')
+        const reasonError = document.querySelector('.reason.error')
+
+
+        const form = document.querySelector('form')
+        form.addEventListener('submit', async(e) => {
+            e.preventDefault()
+            amountError.textContent = ''
+            reasonError.textContent = ''
+
+            // get value
+            const amount = form.amount.value
+            const reason = form.reason.value
+            try {
+                const res = await fetch('/income/add', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        amount: amount,
+                        reason: reason
+                    }),
+                    headers: {
+                        'Content-Type': 'Application/json'
+                    }
+                })
+                const data = await res.json()
+                console.log(data)
+                if (data.errors) {
+                    amountError.textContent = data.errors.amount
+                    reasonError.textContent = data.errors.reason
+
+                }
+                if (data.income) {
+                    location.assign('/user/admin')
+                }
+
+
+            } catch (error) {
+                res.status(400).json({
+                    message: error.message
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

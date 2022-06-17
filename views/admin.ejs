@@ -26,6 +26,8 @@
 <body>
     <div class="row">
         <div class="col-6">
+            <a href="/income/add"> Add New Income</a>
+            <a href="/expense/add">Add New Expense</a>
             <p>Incomes</p>
             <table>
                 <tr>
@@ -34,12 +36,18 @@
                     <th>Delete</th>
                     <th>Edit</th>
                 </tr>
-                <tr>
-                    <td>200</td>
-                    <th>For room</th>
-                    <td><a href="">delete</a></td>
-                    <td><a href="">edit</a></td>
-                </tr>
+                <% for(i in  incomes) { %>
+                    <tr>
+                        <td>
+                            <%= incomes[i].amount %>
+                        </td>
+                        <th>
+                            <%= incomes[i].reason %>
+                        </th>
+                        <td><a href="/admin/income/delete/<%= incomes[i]._id %>">delete</a></td>
+                        <td><a href="/admin/income/edit/<%= incomes[i]._id %>">edit</a></td>
+                    </tr>
+                    <% } %>
 
             </table>
         </div>
@@ -52,12 +60,18 @@
                     <th>Delete</th>
                     <th>Edit</th>
                 </tr>
-                <tr>
-                    <td>200</td>
-                    <th>For room</th>
-                    <td><a href="">delete</a></td>
-                    <td><a href="">edit</a></td>
-                </tr>
+                <% for(i in  expenses) { %>
+                    <tr>
+                        <td>
+                            <%= expenses[i].amount %>
+                        </td>
+                        <th>
+                            <%= expenses[i].reason %>
+                        </th>
+                        <td><a href="/admin/expense/delete/<%= expenses[i]._id %>">delete</a></td>
+                        <td><a href="/admin/expense/edit/<%= expenses[i]._id %>">edit</a></td>
+                    </tr>
+                    <% } %>
 
             </table>
         </div>

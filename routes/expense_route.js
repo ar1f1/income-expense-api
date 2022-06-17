@@ -1,13 +1,14 @@
-const express = require('express')
-const con_expense = require('../controllers/expense_controller')
+const expense_con = require('../controllers/expense_controller')
+var express = require('express')
 const router = express.Router()
+const requireUserAuth = require('../middleware/userAuth')
 
 
 
+router.get('/add', expense_con.add_expense_page)
+router.post('/add', expense_con.post_expense)
 
-router.post('', con_expense.add_expense)
-router.get('', con_expense.get_expense)
-router.delete('/:id', con_expense.delete_expense)
-router.put('/:id', con_expense.edit_expense)
+
+
 
 module.exports = router;

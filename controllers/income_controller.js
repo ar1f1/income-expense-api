@@ -1,53 +1,37 @@
 const Income = require('../model/income')
 
 
-function handle_error(error) {
+const handleErrors = (err) => {
+    let errors = { amount: "", reason: "" }
+
+
+    // Income validate
+    if (err.message.includes("income validation failed")) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message
+
+        })
+
+    }
+    return errors
 
 }
 
-
-module.exports.add_income = async(req, res) => {
+module.exports.add_income_page = (req, res) => {
+    res.render('add_income')
+}
+module.exports.post_income = async(req, res) => {
     try {
         const { amount, reason } = req.body;
-        const income = await Income.create({ amount, reason })
-        res.status(200).json({ income: income._id })
-
-    } catch (error) {
-        res.status(400).json({ Error: error.message })
-    }
-
-}
-module.exports.get_income = async(req, res) => {
-    try {
-        const income = await Income.findById({ id })
-        res.status(200).json({ income })
-    } catch (error) {
-        res.status(400).json({ Error: "please check the url paramiters(id)" })
-    }
-}
-module.exports.edit_income = async(req, res) => {
-    try {
-        const { amount, reason } = req.body
-        const id = req.params.id
-        const income = await Income.findOneAndReplace({ id: _id }, {
-            $set: {
-                amount: amount,
-                reason: reason
-            }
+        const income = await Income.create({
+            amount: amount,
+            reason: reason
         })
         res.status(200).json({ income: income._id })
-
     } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
+        const errors = await handleErrors(error)
+        console.log(errors)
+        res.status(400).json({ errors })
 
-}
-module.exports.delete_income = async(req, res) => {
-    try {
-        const id = req.params.id
-        await Income.deleteOne({ id })
-        res.status(200).json({ message: `Income with ${id} deleted` })
-    } catch (error) {
-        res.status(500).json({ error: error.message })
     }
 }

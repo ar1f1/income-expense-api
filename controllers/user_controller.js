@@ -6,6 +6,10 @@ const jwt = require('jsonwebtoken')
 
 
 
+
+module.exports.add_income = (req, res) => {
+    res.render('add_income')
+}
 module.exports.register = async(req, res) => {
     try {
         const { user_name, email, password } = req.body
@@ -25,7 +29,7 @@ module.exports.get_login = (req, res) => { res.render('login') }
 // Create token function
 const maxAge = 60
 const createToken = (id) => {
-    return jwt.sign({ id }, "life is lough", { expiresIn: maxAge })
+    return jwt.sign({ id }, "life is lough", { expiresIn: maxAge * 60 })
 }
 module.exports.login = async(req, res) => {
     const { user_name, password } = req.body
