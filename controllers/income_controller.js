@@ -1,4 +1,6 @@
 const Income = require('../model/income')
+const { user_id } = require('../utils/constatnt')
+
 
 
 const handleErrors = (err) => {
@@ -25,7 +27,9 @@ module.exports.post_income = async(req, res) => {
         const { amount, reason } = req.body;
         const income = await Income.create({
             amount: amount,
-            reason: reason
+            reason: reason,
+            user_id: user_id.id
+
         })
         res.status(200).json({ income: income._id })
     } catch (error) {

@@ -10,6 +10,9 @@ const expensSchema = new mongoose.Schema({
         type: String,
         required: [true, "please enter Expense reason"]
 
+    },
+    user_id: {
+        type: mongoose.Types.ObjectId
     }
 })
 

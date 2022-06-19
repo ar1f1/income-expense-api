@@ -15,3 +15,8 @@
 body {
     background-color: black;
 }
+
+.navbar {
+    display: inline-block;
+    margin-left: 25px;
+}

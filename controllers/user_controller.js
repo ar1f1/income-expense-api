@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Income = require('../model/income')
 const Expense = require('../model/expense')
+const { user_id } = require('../utils/constatnt')
 
 
 
@@ -44,6 +45,7 @@ module.exports.login = async(req, res) => {
             const auth = await bcrypt.compare(password, user.password)
             if (auth) {
                 const token = createToken(user._id)
+                user_id.id = user._id
                 res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 60 * 1000 })
                 res.status(200).json({ user: user._id })
             } else {

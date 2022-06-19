@@ -10,6 +10,9 @@ const incomeSchema = new mongoose.Schema({
         type: String,
         required: [true, "please enter Income reason"]
 
+    },
+    user_id: {
+        type: mongoose.Types.ObjectId
     }
 })
 

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin</title>
+    <link rel="stylesheet" href="../public/style.css">
     <style>
         .row::after {
             content: "";
@@ -20,15 +21,20 @@
         .col-6 {
             width: 50%;
         }
+        
+        .navbar {
+            display: inline-block;
+            margin-left: 25px;
+        }
     </style>
 </head>
 
 <body>
     <div class="row">
         <div class="col-6">
-            <a href="/income/add"> Add New Income</a>
-            <a href="/expense/add">Add New Expense</a>
-            <a href="/user/logout">Logout</a>
+            <a href="/income/add" class="navbar"> Add New Income</a>
+            <a href="/expense/add" class="navbar">Add New Expense</a>
+            <a href="/user/logout" class="navbar">Logout</a>
             <p>Incomes</p>
             <table>
                 <tr>
