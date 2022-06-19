@@ -11,5 +11,11 @@ router.get('/signup', user_controller.get_signup)
 router.post('/signup', user_controller.register)
 router.get('/admin', requireUserAuth.requireUserAuth, admin.get_admin)
 router.get('/logout', user_controller.logout)
+router.get('/income/delete/:id', user_controller.income_delete)
+router.get('/income/edit/:id', user_controller.income_edit)
+
+router.get('/expense/delete/:id', user_controller.expense_delete)
+router.get('/expense/edit/:id', user_controller.expense_edit)
+
 
 module.exports = router

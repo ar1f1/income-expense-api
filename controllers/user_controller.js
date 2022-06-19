@@ -1,6 +1,8 @@
 const User = require('../model/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const Income = require('../model/income')
+const Expense = require('../model/expense')
 
 
 
@@ -56,3 +58,44 @@ module.exports.login = async(req, res) => {
     }
 }
 module.exports.get_signup = (req, res) => { res.render('signup') }
+module.exports.income_delete = async(req, res) => {
+    try {
+        const id = req.params.id
+        console.log(id)
+        const income = await Income.deleteOne({ _id: id })
+        res.redirect('/user/admin')
+    } catch (error) {
+        res.json({ error: "Income not deleted" })
+    }
+
+}
+module.exports.income_edit = async(req, res) => {
+    try {
+        const id = req.params.id
+        const income = await Income.findOne({ _id: id })
+        await Income.deleteOne({ _id: id })
+        res.render('edit_income', { income: income })
+    } catch (error) {
+        res.json({ error: "not allowed" })
+    }
+}
+module.exports.expense_edit = async(req, res) => {
+    try {
+        const id = req.params.id
+        const expense = await Expense.findOne({ _id: id })
+        await Expense.deleteOne({ _id: id })
+        res.render('edit_expense', { expense: expense })
+
+    } catch (error) {
+        res.json({ error: "not allowed" })
+    }
+}
+module.exports.expense_delete = async(req, res) => {
+    try {
+        const id = req.params.id
+        const expense = await Expense.deleteOne({ _id: id })
+        res.redirect('/user/admin')
+    } catch (error) {
+        res.json({ error: "Expense not delete" })
+    }
+}
