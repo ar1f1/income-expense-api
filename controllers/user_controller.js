@@ -26,7 +26,7 @@ module.exports.register = async(req, res) => {
         })
         res.status(200).json({ user: user._id })
     } catch (error) {
-        res.status(400).json({ message: "there is some error" })
+        res.status(400).json({ message: error.message })
     }
 }
 module.exports.get_login = (req, res) => { res.render('login') }
@@ -100,4 +100,22 @@ module.exports.expense_delete = async(req, res) => {
     } catch (error) {
         res.json({ error: "Expense not delete" })
     }
+}
+module.exports.get_user = (req, res) => {
+    User.find()
+        .then((result) => {
+            res.render("users", { result })
+        })
+        .catch((err) => {
+            res.json(err)
+        })
+}
+module.exports.user_delete = (req, res) => {
+    User.findByIdAndDelete(req.params.id)
+        .then((result) => {
+            res.redirect("/user/users")
+        })
+        .catch((err) => {
+            res.json(err)
+        })
 }
